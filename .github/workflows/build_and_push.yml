@@ -207,4 +207,4 @@ jobs:
           context: .
           file: Dockerfile.${{ matrix.image }}
           push: false
-          tags: temp/${{ matrix.image }}:latest
+          tags: ${{ toLowerCase(matrix.image) }}:latest
