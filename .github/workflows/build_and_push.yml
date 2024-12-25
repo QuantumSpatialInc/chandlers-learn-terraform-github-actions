@@ -154,7 +154,7 @@ jobs:
           esac
 
           # Convert the array to a JSON array string
-          DOCKER_IMAGES_JSON=$(printf '%s\n' "${DOCKER_IMAGES[@]}" | jq -R . | jq -s .)
+          DOCKER_IMAGES_JSON=$(printf '%s\n' "${DOCKER_IMAGES[@]}" | jq -R . | jq -cs .)
           # Check if DOCKER_IMAGES array is empty
           if [ ${#DOCKER_IMAGES[@]} -eq 0 ]; then
             echo "No Docker images to build."
