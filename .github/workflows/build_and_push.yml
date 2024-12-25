@@ -173,7 +173,7 @@ jobs:
           echo "$GITHUB_EVENT"
 
       - name: Terraform Apply
-        if: github.event.pull_request.merged == true
+        if: github.event.pull_request.merged == true && 
         run: terraform apply -auto-approve -input=false
 
       # - name: Build Docker Container
@@ -185,7 +185,7 @@ jobs:
 
   build:
     needs: Retrieve-Build-Options
-    if: needs.Retrieve-Build-Options.outputs.should_proceed == 'true'
+    if: ${{ needs.Retrieve-Build-Options.outputs.should_proceed == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
