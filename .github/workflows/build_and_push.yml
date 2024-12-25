@@ -14,6 +14,9 @@ jobs:
     name: "Build Option Instructions"
     runs-on: ubuntu-latest
     # if: ${{ github.event_name == 'pull_request'}}
+    outputs:
+      should_proceed: ${{ steps.get-labels.outputs.should_proceed }}
+      docker_images: ${{ steps.get-labels.outputs.docker_images }}
     permissions:
       pull-requests: write
     steps:
@@ -115,6 +118,7 @@ jobs:
         run: exit 1
 
       - name: Print PR Labels
+        id: get-labels
         if: github.event.pull_request.merged == true
         env:
           LABELS_JSON: ${{ toJson(github.event.pull_request.labels) }}
